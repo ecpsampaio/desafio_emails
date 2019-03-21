@@ -11,6 +11,8 @@ O primeiro arquivo possui erros de digitação, sua tarefa consiste em:
 
 Você pode usar qualquer linguagem de programação, qualquer interface pode ser aplicada, caso queira usar um banco de dados, pode escolher qualquer um. Todas as decisões técnicas são tomadas por você. Todas as decisões técnicas deverão ser justificadas por você, sua solução precisará ser defendida durante a entrevista final que iremos marcar.
 
+Pode criar um fork deste repositório, desenvolver sua solução, mandar uma pull request como no primeiro, vamos analisar e te procurar para uma próxima entrevista.
+
 Caso tenha alguma dúvida, basta entrar em contato com a gente.
 
 Obrigado por participar de nosso processo, boa sorte!
