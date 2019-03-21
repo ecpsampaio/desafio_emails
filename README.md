@@ -1,4 +1,4 @@
-# Desafio - E-Mails
+# Desafio E-Mails
 
 Desafio da terceira fase do nosso processo seletivo, correções de e-mails. Boa sorte!
 
@@ -9,9 +9,11 @@ O primeiro arquivo possui erros de digitação, sua tarefa consiste em:
 - Gerar automaticamente estatísticas sobre o trabalho realizado;
 - Permitir que adicionemos novos endereços de e-mail, durante a execução do seu sistema, estas entradas deverão ser validadas, corrigidas caso necessário e passar a integrar as métricas e estatísticas apresentadas anteriormente.
 
+# Muito importante
+
 Você pode usar qualquer linguagem de programação, qualquer interface pode ser aplicada, caso queira usar um banco de dados, pode escolher qualquer um. Todas as decisões técnicas são tomadas por você. Todas as decisões técnicas deverão ser justificadas por você, sua solução precisará ser defendida durante a entrevista final que iremos marcar.
 
-Pode criar um fork deste repositório, desenvolver sua solução, mandar uma pull request como no primeiro, vamos analisar e te procurar para uma próxima entrevista.
+**Pode criar um fork deste repositório, desenvolver sua solução, mandar uma pull request como no primeiro, vamos analisar e te procurar para uma próxima entrevista.**
 
 Caso tenha alguma dúvida, basta entrar em contato com a gente.
 
