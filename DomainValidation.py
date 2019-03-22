@@ -66,7 +66,7 @@ class ClientesDb():
     def inserir_de_csv(self, file_name='email_list.csv'):
         os.system('cls')
         emails_validados = open('emails_validados.csv', 'w')
-        emails_invalidos = open('emails_invalios.csv', 'w')
+        emails_invalidos = open('emails_invalidos.csv', 'w')
         cont_validos = 0
         cont_invalidos = 0
         cont_duplicados = 0
