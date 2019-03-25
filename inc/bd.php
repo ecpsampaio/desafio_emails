@@ -1,7 +1,5 @@
 <?php
-
-try {
-    $mysqli = new mysqli("127.0.0.1", "root", "", "test");
-} catch (Exception $ex) {
-    print_r($ex);exit;
-}  
+  if (!$mysqli = new mysqli('127.0.0.1', 'root', '', 'test')) {
+        echo 'ERRO AO CONCTAR AO BANCO';
+        exit();
+    }
