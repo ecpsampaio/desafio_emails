@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
 import pandas as pd
 import re
 
@@ -11,6 +11,7 @@ def index(request):
 
 
 def lerArquivos(request):
+    emailAdicionado = request
     dominios = 'C:/xampp/htdocs/desafio_emails/domain_list.csv'
     emails = 'C:/xampp/htdocs/desafio_emails/email_list.csv'
 
@@ -19,10 +20,10 @@ def lerArquivos(request):
 
     lista_dominios = pd.read_csv(dominios, names=['Domain'])
     lista_emails = pd.read_csv(emails, names=["E-mails"])
+    total = lista_emails.shape[0]
 
     if request != "":
-        total = lista_emails.shape[0]
-        lista_emails.loc[total + 1] = request
+        lista_emails.loc[total+1] = request
 
     for (i, row) in lista_dominios.itertuples():
         dadosDominios.append(row)
@@ -45,12 +46,14 @@ def lerArquivos(request):
         else:
             listEmailErrado.append(email)
 
+    totalErrados = len(listEmailErrado)
+    totalCertos = len(listEmailCerto)
     corrigidos = []
     for i in listEmailErrado:
         resultadoErrado = i.split("@")
         resultErrado = resultadoErrado[1].split("'")
         for j in novoDadosDominios:
-            if re.search(resultErrado[0], j, re.IGNORECASE):
+            if re.search(resultErrado[0], j):
                 if re.search(resultErrado[0], "br") or re.search(resultErrado[0], "mx") or re.search(resultErrado[0], "ar"):
                     resultErrado[0] = j
                     corrigidos.append(resultadoErrado[0] + '@' + resultErrado[0] + "'")
@@ -63,6 +66,10 @@ def lerArquivos(request):
     hotmailMX = []
     hotmailAr = []
     msn = []
+    dictErrado = {}
+    dictCerto ={}
+    contCerto = 0
+    contErrado = 0
 
     for corrigido in corrigidos:
         if re.search('gmail.com', corrigido):
@@ -77,28 +84,52 @@ def lerArquivos(request):
             msn.append(corrigido)
         else:
             hotmail.append(corrigido)
+        login = corrigido.split("@")
+        loginFinal = login[0].split("'")
+        tamLogin = len(loginFinal[1])
+        dictErrado[contErrado] = tamLogin
+        #listErrado[cont] = loginFinal[1]
+        contErrado = contErrado+1
+        #print(dictErrado)
+
+    for emailCerto in listEmailCerto:
+        loginCerto = emailCerto.split("@")
+        LoginCertoFinal = loginCerto[0].split("'")
+        tamLoginCerto = len(LoginCertoFinal[1])
+        dictCerto[contCerto] = tamLoginCerto
+        contCerto = contCerto +1
 
     domains = ['Gmail', 'Hotmail', 'HotmailBr', 'HotmailMx', 'HotmailAr', 'Msn']
     countDomains = [len(gmail),  len(hotmail), len(hotmailBr), len(hotmailMX), len(hotmailAr), len(msn)]
     descricaoX = 'Domínios'
     descricaoY = 'Quantidades de erros de escrita'
 
+    #plotarGraficos(domains, countDomains, descricaoX, descricaoY)
+    #plotarGraficos(dictCerto.values(), descricaoX,domains, 'Tamanho do login')
 
-    plotarGraficos(domains, countDomains, descricaoX, descricaoY)
-    #return corrigidos
+    return render(request, 'resultados.html',
+                  {'countDomains': countDomains,
+                   'totalEmails': total,
+                   'totalCertos':totalCertos,
+                   'totalErrados': totalErrados,
+                   'emailAdicionado': emailAdicionado})
 
 def plotarGraficos(x, y, xLbael, yLabel):
-    matplotlib.pyplot.plot(x, y)
-    matplotlib.pyplot.xlabel(xLbael)
-    matplotlib.pyplot.ylabel(yLabel)
-    matplotlib.pyplot.show()
+    #plt.plot(x, y)
+
+    #plt.show()
+    plt.scatter(x=x, y=y)
+    plt.xlabel(xLbael)
+    plt.ylabel(yLabel)
+    plt.grid(True)
+    plt.show()
 
 def adicionarEmail(request):
     if request.method == 'POST':
         getEmail = request.POST['email']
-        results = lerArquivos(getEmail)
+        lerArquivos(getEmail)
 
-    return render(request, 'resultados.html',{'results' : results})
+    #return render(request, 'resultados.html',{'results' : results})
 
 
-lerArquivos('slrocha@gmail.com')
+lerArquivos('"'"slrocha@gmail.com"'"')

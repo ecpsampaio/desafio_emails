@@ -18,18 +18,60 @@
 <div class="container">
 
 {% csrf_token %}
-  <div class="row">
+  <div class="row col-sm-6">
     <div class="col-sm-5">
       <div class="panel panel-success">
-        <div class="panel-heading">Adicionar E-mail</div>
+        <div class="panel-heading">E-mail Adicionado a lista</div>
         <div class="panel-body">
-          {% for email in x %}
             <p>
-                {{ email }}
+                {{ emailAdicionado }}
             </p>
-           {% endfor %}
         </div>
       </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+     <div class="panel panel-success">
+        <div class="panel-heading">Resultados</div>
+     </div>
+    <div class="col-sm-6">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Total de E-mails</th>
+              <th scope="col">Total de E-mails Corretos</th>
+              <th scope="col">Total de E-mails Errados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{totalEmails}}</td>
+              <td>{{totalCertos}}</td>
+              <td>{{totalErrados}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Erros - Gmails</th>
+              <th scope="col">Erros - Hotmails</th>
+              <th scope="col">Erros - Hotmails BR</th>
+              <th scope="col">Erros - Hotmails MX</th>
+              <th scope="col">Erros - Hotmails AR</th>
+              <th scope="col">Erros - MSN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
     </div>
   </div>
 </div>
