@@ -9,69 +9,84 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
 </head>
-<body>
-<div class="jumbotron text-center">
-  <h1>Desafio E-mails</h1>
-  <p>Desafio proposto para cumprir a terceira etapa do processo seletivo.</p>
-</div>
+<body style="height:1500px">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Processo Seletivo</a>
+    </div>
+  </div>
+</nav>
 
-<div class="container">
-
+<div class="container" style="margin-top:80px">
+ <h3 class="text-center">Desafio dos E-mails.</h3>
+  <div class="row">
+    <div class="col-md-12 center">
+      <p class="text-center">Desafio proposto pela equipe responsável pelo processo seletivo.</p>
+    </div>
+  </div>
 {% csrf_token %}
-  <div class="row col-sm-6">
-    <div class="col-sm-5">
-      <div class="panel panel-success">
-        <div class="panel-heading">E-mail Adicionado a lista</div>
-        <div class="panel-body">
-            <p>
-                {{ emailAdicionado }}
-            </p>
+  <div class="row">
+    <div class="col-sm-3" >
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-success">
+            <div class="panel-heading">E-mail adicionado à lista</div>
+            <div class="panel-body">
+              {% if results.emailAdicionado%}
+                  <p>{{ emailAdicionado }}</p>
+              {% else %}
+                  <p>Nenhum e-mail adicionado</p>
+              {% endif %}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-sm-6">
-     <div class="panel panel-success">
-        <div class="panel-heading">Resultados</div>
-     </div>
-    <div class="col-sm-6">
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Total de E-mails</th>
-              <th scope="col">Total de E-mails Corretos</th>
-              <th scope="col">Total de E-mails Errados</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{totalEmails}}</td>
-              <td>{{totalCertos}}</td>
-              <td>{{totalErrados}}</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <table class="table">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">Erros - Gmails</th>
-              <th scope="col">Erros - Hotmails</th>
-              <th scope="col">Erros - Hotmails BR</th>
-              <th scope="col">Erros - Hotmails MX</th>
-              <th scope="col">Erros - Hotmails AR</th>
-              <th scope="col">Erros - MSN</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="col-sm-9">
+       <div class="row">
+         <div class="panel panel-success">
+            <div class="panel-heading">Resultados</div>
+         </div>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Total de E-mails</th>
+                <th scope="col">Total de E-mails Corretos</th>
+                <th scope="col">Total de E-mails Errados</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{results.totalEmails}}</td>
+                <td>{{results.totalCertos}}</td>
+                <td>{{results.totalErrados}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Erros - Gmails</th>
+                <th scope="col">Erros - Hotmails</th>
+                <th scope="col">Erros - Hotmails BR</th>
+                <th scope="col">Erros - Hotmails MX</th>
+                <th scope="col">Erros - Hotmails AR</th>
+                <th scope="col">Erros - MSN</th>
+              </tr>
+             </thead>
+        <tbody>
+          <tr>
+            <td>{{results.countDomains.0}}</td>
+            <td>{{results.countDomains.1}}</td>
+            <td>{{results.countDomains.2}}</td>
+            <td>{{results.countDomains.3}}</td>
+            <td>{{results.countDomains.4}}</td>
+            <td>{{results.countDomains.5}}</td>
+          </tr>
+        </tbody>
+      </table>
+       </div>
     </div>
   </div>
 </div>

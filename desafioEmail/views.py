@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
 import matplotlib.pyplot as plt
 import pandas as pd
 import re
@@ -11,7 +12,6 @@ def index(request):
 
 
 def lerArquivos(request):
-    emailAdicionado = request
     dominios = 'C:/xampp/htdocs/desafio_emails/domain_list.csv'
     emails = 'C:/xampp/htdocs/desafio_emails/email_list.csv'
 
@@ -22,8 +22,13 @@ def lerArquivos(request):
     lista_emails = pd.read_csv(emails, names=["E-mails"])
     total = lista_emails.shape[0]
 
-    if request != "":
-        lista_emails.loc[total+1] = request
+    if request.POST['email'] != "":
+        emailAdicionado = request.POST['email']
+        lista_emails.loc[total+1] = emailAdicionado
+        total = lista_emails.shape[0]
+    else:
+        emailAdicionado = ""
+
 
     for (i, row) in lista_dominios.itertuples():
         dadosDominios.append(row)
@@ -84,7 +89,9 @@ def lerArquivos(request):
             msn.append(corrigido)
         else:
             hotmail.append(corrigido)
-        login = corrigido.split("@")
+
+    for emailCorrigido in corrigidos:
+        login = emailCorrigido.split("@")
         loginFinal = login[0].split("'")
         tamLogin = len(loginFinal[1])
         dictErrado[contErrado] = tamLogin
@@ -107,12 +114,11 @@ def lerArquivos(request):
     #plotarGraficos(domains, countDomains, descricaoX, descricaoY)
     #plotarGraficos(dictCerto.values(), descricaoX,domains, 'Tamanho do login')
 
-    return render(request, 'resultados.html',
-                  {'countDomains': countDomains,
+    return {'countDomains': countDomains,
                    'totalEmails': total,
                    'totalCertos':totalCertos,
                    'totalErrados': totalErrados,
-                   'emailAdicionado': emailAdicionado})
+                   'emailAdicionado': emailAdicionado}
 
 def plotarGraficos(x, y, xLbael, yLabel):
     #plt.plot(x, y)
@@ -126,10 +132,9 @@ def plotarGraficos(x, y, xLbael, yLabel):
 
 def adicionarEmail(request):
     if request.method == 'POST':
-        getEmail = request.POST['email']
-        lerArquivos(getEmail)
+        results = lerArquivos(request)
 
-    #return render(request, 'resultados.html',{'results' : results})
+    return render(request, 'resultados.html',{'results' : results})
 
 
-lerArquivos('"'"slrocha@gmail.com"'"')
+#lerArquivos('"'"slrocha@gmail.com"'"')
