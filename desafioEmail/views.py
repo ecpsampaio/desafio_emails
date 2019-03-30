@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
 import matplotlib.pyplot as plt
 import pandas as pd
-import re
 
 # Create your views here.
 
@@ -17,13 +18,15 @@ def lerArquivos(request):
 
     dadosDominios = []
     novoDadosDominios = []
+    dadosEmails = []
+    novosDadosEmails = []
 
     lista_dominios = pd.read_csv(dominios, names=['Domain'])
     lista_emails = pd.read_csv(emails, names=["E-mails"])
     total = lista_emails.shape[0]
-
-    if request.POST['email'] != "":
-        emailAdicionado = request.POST['email']
+    #.POST['email']
+    if request != "":
+        emailAdicionado = request
         lista_emails.loc[total+1] = emailAdicionado
         total = lista_emails.shape[0]
     else:
@@ -33,20 +36,28 @@ def lerArquivos(request):
     for (i, row) in lista_dominios.itertuples():
         dadosDominios.append(row)
 
-    for x in dadosDominios:
-        item = x
+    for dominio in dadosDominios:
+        itemDominio = dominio
         for y in ["'"]:
-            item = item.replace(y, "")
-        novoDadosDominios.append(item)
+            item = itemDominio.replace(y, "")
+            novoDadosDominios.append(item)
+
+    for (j, linha) in lista_emails.itertuples():
+        dadosEmails.append(linha)
+
+    for emailList in dadosEmails:
+        itemEmail = emailList
+        for z in ["'"]:
+            addEmail = itemEmail.replace(z, "")
+            novosDadosEmails.append(addEmail)
 
     listEmailCerto = []
     listEmailErrado = []
-    for (i, row) in lista_emails.itertuples():
-        resultado = lista_emails['E-mails'][i].split("@")
-        result = resultado[1].split("'")
-        email = lista_emails['E-mails'][i]
+    for i in novosDadosEmails:
+        resultado = i.split("@")
+        email = i
 
-        if result[0] in novoDadosDominios:
+        if resultado[1] in novoDadosDominios:
             listEmailCerto.append(email)
         else:
             listEmailErrado.append(email)
@@ -54,16 +65,12 @@ def lerArquivos(request):
     totalErrados = len(listEmailErrado)
     totalCertos = len(listEmailCerto)
     corrigidos = []
+
     for i in listEmailErrado:
         resultadoErrado = i.split("@")
-        resultErrado = resultadoErrado[1].split("'")
-        for j in novoDadosDominios:
-            if re.search(resultErrado[0], j):
-                if re.search(resultErrado[0], "br") or re.search(resultErrado[0], "mx") or re.search(resultErrado[0], "ar"):
-                    resultErrado[0] = j
-                    corrigidos.append(resultadoErrado[0] + '@' + resultErrado[0] + "'")
-                else:
-                    corrigidos.append(resultadoErrado[0] + '@' + j + "'")
+        z = process.extractOne(resultadoErrado[1], novoDadosDominios, scorer=fuzz.token_sort_ratio)
+        resultadoErrado[1] = z[0]
+        corrigidos.append(resultadoErrado[0] + '@' + resultadoErrado[1])
 
     gmail = []
     hotmail = []
@@ -71,21 +78,29 @@ def lerArquivos(request):
     hotmailMX = []
     hotmailAr = []
     msn = []
+    gmailStr = 'gmail.com'
+    hotmailStr = 'hotmail.com'
+    hotmailBrStr = 'hotmail.com.br'
+    hotmailMXStr = 'hotmail.com.mx'
+    hotmailArStr = 'hotmail.com.ar'
+    msnStr = 'msn.com'
     dictErrado = {}
     dictCerto ={}
     contCerto = 0
     contErrado = 0
 
     for corrigido in corrigidos:
-        if re.search('gmail.com', corrigido):
+        resultDominio = process.extractOne(corrigido, corrigidos, scorer=fuzz.token_sort_ratio)
+        dominioSep = resultDominio[0].split("@")
+        if dominioSep[1] == gmailStr:
             gmail.append(corrigido)
-        elif re.search('hotmail.com.br', corrigido):
+        elif dominioSep[1] == hotmailStr:
             hotmailBr.append(corrigido)
-        elif re.search('hotmail.com.mx', corrigido):
+        elif dominioSep[1] == hotmailMXStr:
             hotmailMX.append(corrigido)
-        elif re.search('hotmail.com.ar', corrigido):
+        elif dominioSep[1] == hotmailArStr:
             hotmailAr.append(corrigido)
-        elif re.search('msn', corrigido):
+        elif dominioSep[1] == msnStr:
             msn.append(corrigido)
         else:
             hotmail.append(corrigido)
@@ -137,4 +152,4 @@ def adicionarEmail(request):
     return render(request, 'resultados.html',{'results' : results})
 
 
-#lerArquivos('"'"slrocha@gmail.com"'"')
+lerArquivos('"'"slrocha@gmail.com"'"')
