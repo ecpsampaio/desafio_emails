@@ -16,5 +16,17 @@
   $validator = new Validator();
   $invalidEmails = $validator->getEmails($lines)['invalids'];
   $teste = new Corrector();
-  $teste->correct($invalidEmails);
+  //$teste->correct($invalidEmails);
  ?>
+
+<!doctype html>
+  <html lang="en">
+    <head>
+      <?php include("resources/head.php");?>
+    </head>
+    <body>  
+      <?php include("resources/header.php");?>
+      <?php include("resources/body.php");?>
+      <?php include("resources/footer.php");?>
+    </body>
+  </html>
