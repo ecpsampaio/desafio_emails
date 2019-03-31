@@ -5,6 +5,8 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 import matplotlib.pyplot as plt
 import pandas as pd
+import itertools
+
 
 # Create your views here.
 
@@ -24,6 +26,7 @@ def lerArquivos(request):
     lista_dominios = pd.read_csv(dominios, names=['Domain'])
     lista_emails = pd.read_csv(emails, names=["E-mails"])
     total = lista_emails.shape[0]
+
     #.POST['email']
     if request != "":
         emailAdicionado = request
@@ -31,7 +34,6 @@ def lerArquivos(request):
         total = lista_emails.shape[0]
     else:
         emailAdicionado = ""
-
 
     for (i, row) in lista_dominios.itertuples():
         dadosDominios.append(row)
@@ -56,7 +58,6 @@ def lerArquivos(request):
     for i in novosDadosEmails:
         resultado = i.split("@")
         email = i
-
         if resultado[1] in novoDadosDominios:
             listEmailCerto.append(email)
         else:
@@ -65,61 +66,54 @@ def lerArquivos(request):
     totalErrados = len(listEmailErrado)
     totalCertos = len(listEmailCerto)
     corrigidos = []
-
-    for i in listEmailErrado:
-        resultadoErrado = i.split("@")
-        z = process.extractOne(resultadoErrado[1], novoDadosDominios, scorer=fuzz.token_sort_ratio)
-        resultadoErrado[1] = z[0]
-        corrigidos.append(resultadoErrado[0] + '@' + resultadoErrado[1])
-
     gmail = []
     hotmail = []
     hotmailBr = []
     hotmailMX = []
     hotmailAr = []
     msn = []
-    gmailStr = 'gmail.com'
-    hotmailStr = 'hotmail.com'
-    hotmailBrStr = 'hotmail.com.br'
-    hotmailMXStr = 'hotmail.com.mx'
-    hotmailArStr = 'hotmail.com.ar'
-    msnStr = 'msn.com'
+
+    for i in listEmailErrado:
+        resultadoErrado = i.split("@")
+        z = process.extractOne(resultadoErrado[1], novoDadosDominios, scorer=fuzz.token_sort_ratio)
+        resultadoErrado[1] = z[0]
+        corrigidos.append(resultadoErrado[0] + '@' + resultadoErrado[1])
+        if z[0] == 'gmail.com':
+            gmail.append(resultadoErrado[0] + '@' + resultadoErrado[1])
+        elif z[0] == 'hotmail.com.br':
+            hotmailBr.append(resultadoErrado[0] + '@' + resultadoErrado[1])
+        elif z[0] == 'hotmail.com.mx':
+            hotmailMX.append(resultadoErrado[0] + '@' + resultadoErrado[1])
+        elif z[0] == 'hotmail.com.ar':
+            hotmailAr.append(resultadoErrado[0] + '@' + resultadoErrado[1])
+        elif z[0] == 'msn.com':
+            msn.append(resultadoErrado[0] + '@' + resultadoErrado[1])
+        else:
+            hotmail.append(resultadoErrado[0] + '@' + resultadoErrado[1])
+
     dictErrado = {}
     dictCerto ={}
     contCerto = 0
-    contErrado = 0
-
-    for corrigido in corrigidos:
-        resultDominio = process.extractOne(corrigido, corrigidos, scorer=fuzz.token_sort_ratio)
-        dominioSep = resultDominio[0].split("@")
-        if dominioSep[1] == gmailStr:
-            gmail.append(corrigido)
-        elif dominioSep[1] == hotmailStr:
-            hotmailBr.append(corrigido)
-        elif dominioSep[1] == hotmailMXStr:
-            hotmailMX.append(corrigido)
-        elif dominioSep[1] == hotmailArStr:
-            hotmailAr.append(corrigido)
-        elif dominioSep[1] == msnStr:
-            msn.append(corrigido)
-        else:
-            hotmail.append(corrigido)
 
     for emailCorrigido in corrigidos:
         login = emailCorrigido.split("@")
-        loginFinal = login[0].split("'")
-        tamLogin = len(loginFinal[1])
-        dictErrado[contErrado] = tamLogin
-        #listErrado[cont] = loginFinal[1]
-        contErrado = contErrado+1
-        #print(dictErrado)
+        tamLogin = len(login[0])
+        dictErrado[login[0]] = [tamLogin, login[1]]
+        login[1]=""
 
+    dataFrame = pd.DataFrame(data=dictErrado)
+    dataset = dataFrame.T
+
+    dataset.plot(x=dataset.columns[0], y=dataset.columns[1], kind='line', title='Dominio(1)  x Tamanho do Login(0)', color='r')
+    exit()
     for emailCerto in listEmailCerto:
         loginCerto = emailCerto.split("@")
-        LoginCertoFinal = loginCerto[0].split("'")
-        tamLoginCerto = len(LoginCertoFinal[1])
+        tamLoginCerto = len(loginCerto[1])
         dictCerto[contCerto] = tamLoginCerto
         contCerto = contCerto +1
+
+    print(dictErrado)
+    exit()
 
     domains = ['Gmail', 'Hotmail', 'HotmailBr', 'HotmailMx', 'HotmailAr', 'Msn']
     countDomains = [len(gmail),  len(hotmail), len(hotmailBr), len(hotmailMX), len(hotmailAr), len(msn)]
@@ -127,7 +121,9 @@ def lerArquivos(request):
     descricaoY = 'Quantidades de erros de escrita'
 
     #plotarGraficos(domains, countDomains, descricaoX, descricaoY)
-    #plotarGraficos(dictCerto.values(), descricaoX,domains, 'Tamanho do login')
+    #plotarGraficos(dictCerto.values(), descricaoX,domains, 'Tamanho do login') 'countDomains': countDomains,'''
+
+    countDomains = [len(gmail), len(hotmail), len(hotmailBr), len(hotmailMX), len(hotmailAr), len(msn)]
 
     return {'countDomains': countDomains,
                    'totalEmails': total,
@@ -149,7 +145,7 @@ def adicionarEmail(request):
     if request.method == 'POST':
         results = lerArquivos(request)
 
-    return render(request, 'resultados.html',{'results' : results})
+        #return render(request, 'resultados.html',{'results': results})
 
 
-lerArquivos('"'"slrocha@gmail.com"'"')
+lerArquivos("'slrocha@gmail.com'")
