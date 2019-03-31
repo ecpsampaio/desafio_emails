@@ -1,6 +1,7 @@
 # Email Data 
 
-Developed in Django and Bootstrap 
+Developed in Django and Bootstrap <br/>
+
 First of all add this key in the settings.py file <br/>
 
 SECRET_KEY='1irjgo=@od_#m-9nb80_$e4yzee^&&i&hm*radm*ygy^s!2*_z'  <br/>
