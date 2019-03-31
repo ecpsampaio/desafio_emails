@@ -16,12 +16,12 @@ you must uncomment :
     #}<br/>
 #}
 
-In case you wish to run this application in a cloud server
-you need create and setting up a .env file with with the 
-following variables:
-SECRET_KEY = 'secret key of your project' (settings.py)
-DEBUG = 'False or True'
-DATABASE_URL= 'url from your database cloud server.
+In case you wish to run this application in a cloud server<br/>
+you need create and setting up a .env file with with the <br/>
+following variables: <br/>
+SECRET_KEY = 'secret key of your project' (settings.py) <br/>
+DEBUG = 'False or True'<br/>
+DATABASE_URL= 'url from your database cloud server.<br/>
 
 
 
