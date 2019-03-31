@@ -31,5 +31,8 @@ after that run <br/>
 python manage.py migrate
 
 
+So enjoy this application !!!
+
+
 
 
