@@ -14,8 +14,8 @@ database:
     #'default': { <br/>
         #'ENGINE': 'django.db.backends.postgresql_psycopg2', <br/>
         #'NAME': 'statistic', <br/>
-        #'USER': 'YOUR-USER', <br/>
-        #'PASSWORD': 'YOUR-PASSWORD', <br/>
+        #'USER': 'usuario', <br/>
+        #'PASSWORD': '12345', <br/>
        #'HOST': 'localhost', <br/>
         #'PORT': '5432', <br/>
     #}<br/>
