@@ -30,9 +30,9 @@ DATABASE_URL= 'url from your database cloud server.<br/>
 
 
 4 - After all set up, you need to run: <br/>
-python manage.py makemigrations <br/>
-after that run <br/>
-python manage.py migrate
+- Install all dependences in the requirements.txt file <br/>
+- Run python manage.py makemigrations <br/>
+- Run python manage.py migrate
 
 
 So enjoy this application !!!
