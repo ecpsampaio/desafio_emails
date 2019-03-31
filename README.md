@@ -5,15 +5,15 @@ Developed in Django and Bootstrap
 In case you wish to run this application in localhost
 you must uncomment :
 
-#DATABASES = {
-    #'default': {
-        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': 'statistic',
-        #'USER': 'usuario',
-        #'PASSWORD': '12345',
-       #'HOST': 'localhost',
-        #'PORT': '5432',
-    #}
+#DATABASES = { <br/>
+    #'default': { <br/>
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2', <br/>
+        #'NAME': 'statistic', <br/>
+        #'USER': 'usuario', <br/>
+        #'PASSWORD': '12345', <br/>
+       #'HOST': 'localhost', <br/>
+        #'PORT': '5432', <br/>
+    #}<br/>
 #}
 
 In case you wish to run this application in a cloud server
