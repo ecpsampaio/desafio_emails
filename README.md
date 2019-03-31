@@ -1,6 +1,9 @@
 # Email Data 
 
 Developed in Django and Bootstrap 
+First of all add this key in the settings.py file <br/>
+
+SECRET_KEY='1irjgo=@od_#m-9nb80_$e4yzee^&&i&hm*radm*ygy^s!2*_z'  <br/>
 
 In case you wish to run this application in localhost
 you must uncomment and setting up the variables according your 
