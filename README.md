@@ -29,7 +29,7 @@ DEBUG = 'False or True'<br/>
 DATABASE_URL= 'url from your database cloud server.<br/>
 
 
-4 - After all set up, you need to run <br/>
+4 - After all set up, you need to run: <br/>
 python manage.py makemigrations <br/>
 after that run <br/>
 python manage.py migrate
