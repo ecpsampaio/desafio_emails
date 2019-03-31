@@ -2,11 +2,11 @@
 
 Developed in Django and Bootstrap <br/>
 
-First of all add this key in the settings.py file <br/>
+1 - First of all add this key in the settings.py file <br/>
 
 SECRET_KEY='1irjgo=@od_#m-9nb80_$e4yzee^&&i&hm*radm*ygy^s!2*_z'  <br/>
 
-In case you wish to run this application in localhost
+2 - In case you wish to run this application in localhost
 you must uncomment and setting up the variables according your 
 database:
 
@@ -21,15 +21,15 @@ database:
     #}<br/>
 #}
 
-In case you wish to run this application in a cloud server host <br/>
+3 - In case you wish to run this application in a cloud server host <br/>
 you need create and setting up a .env file with with the <br/>
 following variables: <br/>
-SECRET_KEY = 'secret key of your project' (settings.py) <br/>
+SECRET_KEY = 'secret key of your project'  (STEP 1) <br/>
 DEBUG = 'False or True'<br/>
 DATABASE_URL= 'url from your database cloud server.<br/>
 
 
-after all set up, you need to run <br/>
+4 - After all set up, you need to run <br/>
 python manage.py makemigrations <br/>
 after that run <br/>
 python manage.py migrate
