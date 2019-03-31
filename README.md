@@ -3,7 +3,8 @@
 Developed in Django and Bootstrap 
 
 In case you wish to run this application in localhost
-you must uncomment :
+you must uncomment and setting up the variables according your 
+database:
 
 #DATABASES = { <br/>
     #'default': { <br/>
@@ -22,6 +23,12 @@ following variables: <br/>
 SECRET_KEY = 'secret key of your project' (settings.py) <br/>
 DEBUG = 'False or True'<br/>
 DATABASE_URL= 'url from your database cloud server.<br/>
+
+
+after all set up, you need to run <br/>
+python manage.py makemigrations <br/>
+after that run <br/>
+python manage.py migrate
 
 
 
