@@ -16,7 +16,7 @@ you must uncomment :
     #}<br/>
 #}
 
-In case you wish to run this application in a cloud server<br/>
+In case you wish to run this application in a cloud server host <br/>
 you need create and setting up a .env file with with the <br/>
 following variables: <br/>
 SECRET_KEY = 'secret key of your project' (settings.py) <br/>
