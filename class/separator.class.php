@@ -8,12 +8,26 @@
          * 
          */
         public function getDomains($lines){
-           $dominios = array(); //Crio um array com os domínos
+           $domains = array(); //Crio um array com os domínos
+           $noDomain = array(); //emails sem dominos
             foreach ($lines as $line) { //Percorro as linhas do arquivo
-                $result = explode("@", $line[0]); //Quebro a linha em dois índices, um é o 'email', outro é o dominio
-                $dominios[]= $result[1]; //Preencho o array domínios com result[1], que são apenas os domínios
+                if(!empty($line)){ //Checo se a linha é vazia
+                    $result = explode("@", $line); //Quebro a linha em dois índices, um é o 'email', outro é o dominio
+                    $domains[]= $result[1]; //Preencho o array domínios com result[1], que são apenas os domínios
+                }
             }
-            return $dominios; //Retorno os domínios
+            return $domains; //Retorno os domínios
+        }
+        /**
+         * Funçao estática que retorna o domino da linha em questão
+         * @param email E-mail que será usado para buscar dominio.
+         */
+        public static function getDomain($email){
+            if( !empty($email) ) {
+                $result = explode("@", $email);
+                return $result[1];
+            }
+            return false;
         }
 
         /**
@@ -22,9 +36,17 @@
         public function getValidDomains(){
             $leitor = new Reader(); //Instancia um novo leitor
             $lines = $leitor->read('assets/domain_list.csv'); //Chama a função do leitor passando a lista de domínios como parametro
-            return $lines;  //Retorna as linhas 
+            if(!empty($lines)){ //Se as lihas forem não vazias
+                return $lines;  //Retorna as linhas
+            } 
         }
-
+        /**
+         * Retorna um leitor para os emails
+         */
+        public function getEmails(){
+            $leitor = new Reader(); //Instancia um novo leitor
+            return $leitor->read("assets/teste.csv"); //Retorna as linhas do arquivo (Os emails)
+        }
         
-    }
+ }
 ?>

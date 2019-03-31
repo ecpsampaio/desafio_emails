@@ -6,11 +6,15 @@
   include("class/reader.class.php");
   include("class/separator.class.php");
   include("class/validator.class.php");
+  include("class/corrector.class.php");
   
   $leitor = new Reader();
   $lines = $leitor->read('assets/teste.csv'); //Executo a função que lê o arquivo CSV
   $separator = new Separator(); //Instancio o separador
   //var_dump($separator->getDomains($lines)); //Executo a função que pega apenas os domínios
-  $domValid = ($separator->getValidDomains()); //Função que retorna a lsita de domínios válidos
-  
+  $domValid = $separator->getValidDomains(); //Função que retorna a lsita de domínios válidos
+  $validator = new Validator();
+  $invalidEmails = $validator->getEmails($lines)['invalids'];
+  $teste = new Corrector();
+  $teste->correct($invalidEmails);
  ?>
