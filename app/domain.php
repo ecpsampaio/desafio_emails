@@ -123,5 +123,5 @@ require_once $path."/database/_sql_connect.php";
     </div>
 </body>
 
-<?php require_once $path."/config/footer.php";?>
+    <?php require_once $path."/config/footer.php";?>
 </html>

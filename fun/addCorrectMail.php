@@ -70,15 +70,14 @@ foreach ($domain_obj as $domain) { // passagen de objeto dominio
     }
 }
 
-$query = "INSERT INTO mailcorrect (mailAdress,region,user)
-VALUES (:mailAdress,:region,:user);";
+$query = "INSERT INTO mailoldlist (mailAdress)
+VALUES (:mailAdress);";
+
 
 if (verfy_tb('mailcorrect') != false) {
     $cx = cx_bench("mailtool");
     $stmt = $cx->prepare($query);
     $stmt->bindValue(":mailAdress",$mail->getSimilarDomain());
-    $stmt->bindValue(":region",$mail->getRegion());
-    $stmt->bindValue(":user",$mail->getUser());
     $stmt->execute();
     header("Location: ../app/teste.php?task=valid");
 }
