@@ -13,7 +13,8 @@
             foreach ($lines as $line) { //Percorro as linhas do arquivo
                 if(!empty($line)){ //Checo se a linha é vazia
                     $result = explode("@", $line); //Quebro a linha em dois índices, um é o 'email', outro é o dominio
-                    $domains[]= $result[1]; //Preencho o array domínios com result[1], que são apenas os domínios
+                    if( count($result) == 2 )
+                        $domains[]= $result[1]; //Preencho o array domínios com result[1], que são apenas os domínios
                 }
             }
             return $domains; //Retorno os domínios
@@ -25,7 +26,8 @@
         public static function getDomain($email){
             if( !empty($email) ) {
                 $result = explode("@", $email);
-                return $result[1];
+                if( count($result) == 2 )
+                    return $result[1];
             }
             return false;
         }
@@ -35,7 +37,7 @@
          */
         public function getValidDomains(){
             $leitor = new Reader(); //Instancia um novo leitor
-            $lines = $leitor->read('assets/domain_list.csv'); //Chama a função do leitor passando a lista de domínios como parametro
+            $lines = $leitor->read(LIST_DOMAINS); //Chama a função do leitor passando a lista de domínios como parametro
             if(!empty($lines)){ //Se as lihas forem não vazias
                 return $lines;  //Retorna as linhas
             } 
@@ -45,7 +47,7 @@
          */
         public function getEmails(){
             $leitor = new Reader(); //Instancia um novo leitor
-            return $leitor->read("assets/teste.csv"); //Retorna as linhas do arquivo (Os emails)
+            return $leitor->read(LIST_EMAILS); //Retorna as linhas do arquivo (Os emails)
         }
         
  }

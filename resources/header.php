@@ -9,10 +9,16 @@
         <a class="nav-link" href="?page=home">Início <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="?page=cadaster">Cadastrar</a>
+        <a class="nav-link" href="?page=register_domain">Cadastrar Domínio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="?page=register_email">Cadastrar Email</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="?page=statistic">Estatísticas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="?page=me">Sobre nós</a>
       </li>
     </ul>
   </div>

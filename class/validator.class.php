@@ -14,7 +14,7 @@
          */
         public function getInvalidDomains($domains, $validDomains){
             $leitor = new Reader(); //Instancio o leitor
-            $lines = $leitor->read("assets/teste.csv"); //Passo o caminho do arquivo a ser lido
+            $lines = $leitor->read(LIST_EMAILS); //Passo o caminho do arquivo a ser lido
             $separator = new Separator(); //Instancio o separador
             $domains = $separator->getDomains($lines); //Passo as linhas do arquivo aberto como parâmetro ao separador e ele me retorna os domínios
             $invalidDomains = array();
@@ -30,7 +30,7 @@
          * @param $domain: Dominios de emails de um arquivo lido
          * Função privada da classe Validator, retorna false ou true para getInvalidDomains checar se é valido ou não
          */
-        private function isValidDomain($domain){
+        public function isValidDomain($domain){
             $separator = new Separator();
             $domainsValids = $separator->getValidDomains(); //Dados necessários ao funcionamento da funcção
             return in_array($domain, $domainsValids);
@@ -42,7 +42,7 @@
          */
         public function getEmails($lines){
             $leitor = new Reader();
-            $lines = $leitor->read("assets/teste.csv");
+            $lines = $leitor->read(LIST_EMAILS);
             $validsEmails = array();
             $invalidsEmails = array();
             

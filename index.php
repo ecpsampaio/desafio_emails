@@ -2,14 +2,17 @@
   ini_set('display_errors',1);
   ini_set('display_startup_erros',1);
   error_reporting(E_ALL);
+  define('LIST_EMAILS', 'assets/email_list.csv');
+  define('LIST_DOMAINS', 'assets/domain_list.csv');
 
   include("class/reader.class.php");
   include("class/separator.class.php");
   include("class/validator.class.php");
   include("class/corrector.class.php");
+  include("class/report.class.php");
   
   $leitor = new Reader();
-  $lines = $leitor->read('assets/teste.csv'); //Executo a função que lê o arquivo CSV
+  $lines = $leitor->read(LIST_EMAILS); //Executo a função que lê o arquivo CSV
   $separator = new Separator(); //Instancio o separador
   //var_dump($separator->getDomains($lines)); //Executo a função que pega apenas os domínios
   $domValid = $separator->getValidDomains(); //Função que retorna a lsita de domínios válidos
