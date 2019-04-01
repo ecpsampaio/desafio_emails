@@ -1,18 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import render_to_response
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 import matplotlib.pyplot as plt
 import pandas as pd
-import itertools
-
 
 # Create your views here.
 
 def index(request):
     return render(request, 'index.html')
-
 
 def lerArquivos(request):
     dominios = 'C:/xampp/htdocs/desafio_emails/domain_list.csv'
@@ -27,9 +22,8 @@ def lerArquivos(request):
     lista_emails = pd.read_csv(emails, names=["E-mails"])
     total = lista_emails.shape[0]
 
-    #.POST['email']
-    if request != "":
-        emailAdicionado = request
+    if request.POST['email'] != "":
+        emailAdicionado = request.POST['email']
         lista_emails.loc[total+1] = emailAdicionado
         total = lista_emails.shape[0]
     else:
@@ -66,12 +60,12 @@ def lerArquivos(request):
     totalErrados = len(listEmailErrado)
     totalCertos = len(listEmailCerto)
     corrigidos = []
-    gmail = []
-    hotmail = []
-    hotmailBr = []
-    hotmailMX = []
-    hotmailAr = []
-    msn = []
+    gmail = [] #0
+    hotmail = [] #1
+    hotmailBr = [] #2
+    hotmailMX = [] #3
+    hotmailAr = [] #4
+    msn = [] #5
 
     for i in listEmailErrado:
         resultadoErrado = i.split("@")
@@ -93,7 +87,6 @@ def lerArquivos(request):
 
     dictErrado = {}
     dictCerto ={}
-    contCerto = 0
 
     for emailCorrigido in corrigidos:
         login = emailCorrigido.split("@")
@@ -101,19 +94,52 @@ def lerArquivos(request):
         dictErrado[login[0]] = [tamLogin, login[1]]
         login[1]=""
 
-    dataFrame = pd.DataFrame(data=dictErrado)
-    dataset = dataFrame.T
+    dataFrameErrados = pd.DataFrame(data=dictErrado)
+    datasetErrados = dataFrameErrados.T.reset_index()
 
-    dataset.plot(x=dataset.columns[0], y=dataset.columns[1], kind='line', title='Dominio(1)  x Tamanho do Login(0)', color='r')
-    exit()
+    for (i, row) in datasetErrados[1].iteritems():
+        if row == "gmail.com":
+            datasetErrados[1][i] = 0;
+        if row == "hotmail.com":
+            datasetErrados[1][i] = 1;
+        if row == "hotmail.com.br":
+            datasetErrados[1][i] = 2;
+        if row == "hotmail.com.mx":
+            datasetErrados[1][i] = 3;
+        if row == "hotmail.com.ar":
+            datasetErrados[1][i] = 4;
+        if row == "msn.com":
+            datasetErrados[1][i] = 5;
+
+    groupByErrados = datasetErrados.groupby([datasetErrados[0],datasetErrados[1]], as_index=False).size()
+
+    print(groupByErrados)
+    #exit()
+
     for emailCerto in listEmailCerto:
         loginCerto = emailCerto.split("@")
-        tamLoginCerto = len(loginCerto[1])
-        dictCerto[contCerto] = tamLoginCerto
-        contCerto = contCerto +1
+        tamLoginCerto = len(loginCerto[0])
+        dictCerto[loginCerto[0]] = [tamLoginCerto, loginCerto[1]]
+        loginCerto[1] = ""
 
-    print(dictErrado)
-    exit()
+    dataFrameCerto = pd.DataFrame(data=dictCerto)
+    datasetCerto = dataFrameCerto.T.reset_index()
+
+    for (a, rows) in datasetCerto[1].iteritems():
+        if rows == "gmail.com":
+            datasetCerto[1][a] = 0;
+        if rows == "hotmail.com":
+            datasetCerto[1][a] = 1;
+        if rows == "hotmail.com.br":
+            datasetCerto[1][a] = 2;
+        if rows == "hotmail.com.mx":
+            datasetCerto[1][a] = 3;
+        if rows == "hotmail.com.ar":
+            datasetCerto[1][a] = 4;
+        if rows == "msn.com":
+            datasetCerto[1][a] = 5;
+
+    print(datasetCerto.groupby([datasetCerto[0], datasetCerto[1]]).size())
 
     domains = ['Gmail', 'Hotmail', 'HotmailBr', 'HotmailMx', 'HotmailAr', 'Msn']
     countDomains = [len(gmail),  len(hotmail), len(hotmailBr), len(hotmailMX), len(hotmailAr), len(msn)]
@@ -132,9 +158,6 @@ def lerArquivos(request):
                    'emailAdicionado': emailAdicionado}
 
 def plotarGraficos(x, y, xLbael, yLabel):
-    #plt.plot(x, y)
-
-    #plt.show()
     plt.scatter(x=x, y=y)
     plt.xlabel(xLbael)
     plt.ylabel(yLabel)
@@ -144,8 +167,7 @@ def plotarGraficos(x, y, xLbael, yLabel):
 def adicionarEmail(request):
     if request.method == 'POST':
         results = lerArquivos(request)
+        return render(request, 'resultados.html',{'results': results})
 
-        #return render(request, 'resultados.html',{'results': results})
 
-
-lerArquivos("'slrocha@gmail.com'")
+#lerArquivos("'slrocha@gmail.com'")
