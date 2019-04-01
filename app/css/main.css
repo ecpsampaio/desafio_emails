@@ -1,0 +1,37 @@
+h1 {
+    font-size: 2.5em !important;
+}
+
+h2, h3 {
+    font-size: 2em;
+}
+
+p {
+    font-size: 1em;
+}
+
+form
+{
+    width: 35vw;
+}
+
+.hiddrenThis {
+    visibility: hidden;
+}
+
+.visibileThis {
+    visibility: visible;
+}
+
+.status {
+    color: var(--bg_white) !important;
+}
+
+.btn {
+    background-color: var(--ok) !important;
+    color: var(--bg_white) !important;
+}
+
+.bg-y {
+    background-color: var(--ok) !important; 
+}

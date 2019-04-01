@@ -1,0 +1,46 @@
+html {
+    overflow-y: hidden;
+}
+
+.itens-cont {
+    height: 120vh;
+}
+
+.ft_dp {
+    color:  var(--ok) !important;
+}
+
+.page-left {
+    font-size: 1em;
+    border: none;
+    top: 20vh;
+    width: 20vw !important;
+    position: fixed !important;
+}
+.page-left1 {
+    top: 10vh;
+    height: 20vh;
+    width: 20vw !important;
+    position: fixed !important;
+}
+
+.section-all {
+    margin-left: 10vw;
+}
+
+.navit {
+    z-index: 100000;
+    color: var(--bg_white) !important;
+    border: none !important;
+}
+.darken-3  {
+    color: var(--bg_white) !important;
+}
+
+
+.fixa {
+    position: fixed !important;
+    top: 20vh !important;
+}
+
+

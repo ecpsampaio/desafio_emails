@@ -1,0 +1,9 @@
+nav {
+    background-color: var(--pry);
+}
+
+.logo-brand-img {
+    max-height: 60%;
+    margin: 1vh;
+    margin-right: 2vw;
+}

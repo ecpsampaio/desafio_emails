@@ -1,0 +1,5 @@
+Como avaliar:
+
+Se similar for falso: poucos caracteres que não permitem avaliação
+Se o status for false há erro
+Senão está tudo ok
