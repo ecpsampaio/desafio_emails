@@ -1,20 +1,11 @@
-# Desafio E-Mails
-
-Desafio da terceira fase do nosso processo seletivo, correções de e-mails. Boa sorte!
-
-Neste repositório temos dois aqruivos, um contendo endereços de e-mail, outro contendo domínios de provedores de e-mails.
-O primeiro arquivo possui erros de digitação, sua tarefa consiste em:
-
-- Identificar e corrigir os e-mails errados, comparando com os domínios presentes no segundo arquivo
-- Gerar automaticamente estatísticas sobre o trabalho realizado;
-- Permitir que adicionemos novos endereços de e-mail, durante a execução do seu sistema, estas entradas deverão ser validadas, corrigidas caso necessário e passar a integrar as métricas e estatísticas apresentadas anteriormente.
-
-# Muito importante
-
-Você pode usar qualquer linguagem de programação, qualquer interface pode ser aplicada, caso queira usar um banco de dados, pode escolher qualquer um. Todas as decisões técnicas são tomadas por você. Todas as decisões técnicas deverão ser justificadas por você, sua solução precisará ser defendida durante a entrevista final que iremos marcar.
-
-**Pode criar um fork deste repositório, desenvolver sua solução, mandar uma pull request como no primeiro, vamos analisar e te procurar para uma próxima entrevista.**
-
-Caso tenha alguma dúvida, basta entrar em contato com a gente.
-
-Obrigado por participar de nosso processo, boa sorte!
+# SearchMail 
+## Sistema em php que irá ler uma lista de emails e verificar de acordo com o endereço do servidor se são válidos ou se os usuários digitaram corretamente/
+## Este sistema irá reilizar a leitura de endereçoes de email, confirmar suas validades
+### NOTA: Uma solução para o input foi tomada de forma devida para que não haja erros futuros
+## Requisitos:
++ [XAMP v3.x](https://www.apachefriends.org/pt_br/index.html "Clique e acesse agora!") ou similar ao servidor apache com suporte ao [PHP 7.x+](https://www.php.net/)
++ [MySQL (Oracle)](https://www.mysql.com/) 8.x+ e similares
++ Navegador web ([Chrome](https://www.google.com/chrome/) ou similar)
+## Recomendações:
+ + Para conseguir conectar o banco de daods modifique as constantes do ./config/const.php
+ + Na pasta ./database encontra-se o script em sql e a scenepara MySQL Worchbench
