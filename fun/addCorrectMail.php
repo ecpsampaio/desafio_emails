@@ -74,11 +74,13 @@ $query = "INSERT INTO mailoldlist (mailAdress)
 VALUES (:mailAdress);";
 
 
-if (verfy_tb('mailcorrect') != false) {
+if (verfy_tb('mailoldlist') != false) {
+    $mailtrue = $mail->getUser()."@".$mail->getSimilarDomain();
     $cx = cx_bench("mailtool");
     $stmt = $cx->prepare($query);
-    $stmt->bindValue(":mailAdress",$mail->getSimilarDomain());
+    $stmt->bindValue(":mailAdress",$mailtrue);
     $stmt->execute();
+    var_dump($mailtrue);
     header("Location: ../app/teste.php?task=valid");
 }
 ?>

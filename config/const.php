@@ -7,4 +7,5 @@ define("SQL_USER","root");
 define("SQL_PASS","vfbr1101");
 define("SQL_BENCH","mailtool");
 
+// o banco de dados é o mailtool, a tabela de endereços com erros é a mailoldlist e os endereços finais são exportados em mailcorrect
 ?>

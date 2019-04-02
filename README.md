@@ -9,3 +9,9 @@
 ## Recomendações:
  + Para conseguir conectar o banco de daods modifique as constantes do ./config/const.php
  + Na pasta ./database encontra-se o script em sql e a scenepara MySQL Worchbench
+ ## Tabelas
+ + mailtool é o banco de dados
+ + mailoldlist são os e-mails sem as correções
+ + mailcorrect são os e-mails com as correções
+ + domainlist é a lista de domínios
+ + exception são as regras
