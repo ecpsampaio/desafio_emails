@@ -9,7 +9,6 @@
          */
         public function getDomains($lines){
            $domains = array(); //Crio um array com os domínos
-           $noDomain = array(); //emails sem dominos
             foreach ($lines as $line) { //Percorro as linhas do arquivo
                 if(!empty($line)){ //Checo se a linha é vazia
                     $result = explode("@", $line); //Quebro a linha em dois índices, um é o 'email', outro é o dominio
@@ -19,6 +18,8 @@
             }
             return $domains; //Retorno os domínios
         }
+        
+
         /**
          * Funçao estática que retorna o domino da linha em questão
          * @param email E-mail que será usado para buscar dominio.
@@ -31,6 +32,7 @@
             }
             return false;
         }
+
 
         /**
          * Retorna os domínios válidos

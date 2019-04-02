@@ -2,7 +2,10 @@
     require_once("validator.class.php");
 
     class Report {
-
+        //Email = Nome + @ + Domínio
+        /**
+         * Retorna a quantidade de cada domínio inválido para geração de gráficos
+         */
         public function getInvalidsDomainsReport(){
             $reader = new Reader();
             $lines = $reader->read(LIST_EMAILS);
@@ -13,6 +16,21 @@
             $invalidDomains = $validator->getInvalidDomains($domains,$validDomains); //Pego Domínios Inválidos
             $data = array_count_values($invalidDomains);
             return $data;
+        }
+        /**
+         * Retorna a quantidade de nome inválido para geração de gráfico
+         */
+        public function getDuplicateEmailsReport(){
+            $reader = new Reader();
+            $lines = $reader->read(LIST_EMAILS);
+            $emailsCount = array_count_values($lines);
+            $repeateds = array(); 
+            foreach ($emailsCount as $email => $quantidade) {
+                if($quantidade > 1){
+                    $repeateds[] = array($quantidade => $email);
+                }
+            }
+            return $repeateds;
         }
     }
 

@@ -11,15 +11,6 @@
   include("class/corrector.class.php");
   include("class/report.class.php");
   
-  $leitor = new Reader();
-  $lines = $leitor->read(LIST_EMAILS); //Executo a função que lê o arquivo CSV
-  $separator = new Separator(); //Instancio o separador
-  //var_dump($separator->getDomains($lines)); //Executo a função que pega apenas os domínios
-  $domValid = $separator->getValidDomains(); //Função que retorna a lsita de domínios válidos
-  $validator = new Validator();
-  $invalidEmails = $validator->getEmails($lines)['invalids'];
-  $teste = new Corrector();
-  //$teste->correct($invalidEmails);
  ?>
 
 <!doctype html>
@@ -30,6 +21,5 @@
     <body>  
       <?php include("resources/header.php");?>
       <?php include("resources/body.php");?>
-      <?php include("resources/footer.php");?>
     </body>
   </html>

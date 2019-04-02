@@ -9,28 +9,30 @@
 
         /**
          * Função que corrige os emails inválidos
+         * @param invaldEmails: Emails invaldios gerados em Validator->getInvalidDomains
          */
         public function correct($invaldEmails){
             $separator = new Separator();
             $validDomains = $separator->getValidDomains();
-            $smallerDifference = 99999;
-            foreach($invaldEmails as $email){ //retorno os emails invalidos
+            $correctdEmails = array();
+            foreach($invaldEmails as $key=> $email){ //retorno os emails invalidos
+                $smallerDifference = 99999; //Pego a menor diferença dentro de cada loop
                 foreach($validDomains as  $domain){ //retorno apenas dominos validos
-                    $d = Separator::getDomain($email); //Retorno o dominio de um dado e-mail
+                    //$smallerDifference = 99999;
+                    $d = Separator::getDomain($email); //Retorno o dominio do email inválido para posterior comparação e correção
                     if(strpos($domain, $d)){ //Checa se tem ocorrência de pedaço de dominio naquele email 
                         $diff = strlen($domain) - strlen($d); //Calculo a diferença entre o dominio e o pedaço de dominio
                         if($diff < $smallerDifference){ //Se diferença for menor que menor diferença
-                            echo "<h4>O valor do D era: $d</h4>";
-                            $d = $domain;
-                            echo "<h4> Valor de D  agora é = $d</h4>";
-                            $smallerDifference = $diff;
+                            
+                            //$d = $domain; //Troco o $d = $domain; //Troco o Domínio
+                            $email = str_replace($d, $domain, $email);
+                            $smallerDifference = $diff; //Atualizo o valor de menor diferença para a menor diferença encontrada
+                            $correctdEmails[] = $email;
                         }
-                        echo $domain . ' -> ' . $d . ' diff= ' . $diff.'<br>';
-                        echo "A menor diferença agora é: $smallerDifference <br><br>";
-                    }
-                    echo "Fim do loop para checagem de $d em $domain <br>";
+                    } 
                 }
             }
+            return $correctdEmails;
         }
     }
 ?>

@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body{
+    font-family: 'Roboto', sans-serif;
+    height: 670px;
+    opacity: 1;
+}
+
+p{
+    font-size: 20px;
+}
+.list-group-item{
+    color: black;
+    background-color: white;
+}
+
+.list-group-item:hover{
+    color: black;
+}
+
+#form{
+    text-align: center;
+    padding: 50px;
+    background: white;
+}
