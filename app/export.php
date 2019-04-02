@@ -29,10 +29,10 @@
 
     <div class="container">
         <h1>Exportar tabelas</h1>
-        <h2>Somente a exportação aplica a correção em definitivo</h2>
+        <h2>Somente a exportação po SQL aplica a correção em definitivo</h2>
         <h2>OBS: caso seja iniciada a exportação recomenda-se que o usuário não ultilize a ferramenta até que a exportação esteja concluida</h2>
-        <a class="btn" href="../app/exp/csv.php">Exportar em CSV</a>
-        <a class="btn" href="../app/exp/csv.php">Exportar em SQL</a>
+        <a class="btn" href="../app/csv.php">Exportar em CSV</a>
+        <a class="btn" href="../app/sql.php">Exportar em SQL</a>
         <a class="btn" href="../app/view_all.php">Ver previsão</a>
 
     </div>

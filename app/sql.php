@@ -1,28 +1,30 @@
 <?php
+set_time_limit(0); // Limite de tempo de execução: Deixe 0 (zero) para sem limite
+ignore_user_abort( true ); // Não encerra o processamento em caso de perda de conexão
 // database connection
     $path = dirname(__DIR__);
-    include_once $path."../../database/_sql_connect.php";
-    include_once $path."../../tables/_domainList.php";
-    include_once $path."../../tables/_mailoldlist.php";
-    include_once $path."../../tables/_correctmails.php";
-    include_once $path."../../tables/_explist.php";
+    include_once $path."/database/_sql_connect.php";
+    include_once $path."/tables/_domainList.php";
+    include_once $path."/tables/_mailoldlist.php";
+    include_once $path."/tables/_correctmails.php";
+    include_once $path."/tables/_explist.php";
 
 
     // funções
-    require_once $path."../..//fun/ValidDomain.php";
-    require_once $path."../..//fun/ErrorDomain.php";
-    require_once $path."../..//fun/ErrorCounter.php";
-    require_once $path."../..//fun/WhereErrorDomain.php";
+    require_once $path."/fun/ValidDomain.php";
+    require_once $path."/fun/ErrorDomain.php";
+    require_once $path."/fun/ErrorCounter.php";
+    require_once $path."/fun/WhereErrorDomain.php";
 
     //classes
-    require_once $path."../../_class/_Mails.php";
-    require_once $path."../../_class/_Domain.php";
-    require_once $path."../../_class/_Region.php";
-    require_once $path."../../_class/_ErrorCase.php";
-    require_once $path."../../_class/_TB_RULESs.php";
+    require_once $path."/_class/_Mails.php";
+    require_once $path."/_class/_Domain.php";
+    require_once $path."/_class/_Region.php";
+    require_once $path."/_class/_ErrorCase.php";
+    require_once $path."/_class/_exceptions.php";
 
     // carregadores
-    require_once $path."../../fun/carryCorrectCases.php";
+    require_once $path."/fun/carryCorrectCases.php";
 
     // lista de dominio
         // teste
@@ -63,8 +65,8 @@
     }
     
     // tabela de exceções
-    foreach ($TB_RULES_list as $exp) {
-        $except[] = new _TB_RULESs($exp['domainAdress'],$exp['rule']);
+    foreach ($exception_list as $exp) {
+        $except[] = new _exceptions($exp['domainAdress'],$exp['rule']);
     }
     
     // validador de dominio
@@ -84,7 +86,7 @@
         }
     }
 
-    $query = "INSERT INTO mailcorect (mailAdress)
+    $query = "INSERT INTO mailcorrect (mailAdress)
     VALUES (:mailAdress);";
 
     foreach ($mail_obj as $value) {

@@ -22,8 +22,6 @@
     require_once $path."/_class/_ErrorCase.php";
     require_once $path."/_class/_Exceptions.php";
 
-    // carregadores
-    require_once $path."/fun/carryCorrectCases.php";
 
     // lista de dominio
         // teste
