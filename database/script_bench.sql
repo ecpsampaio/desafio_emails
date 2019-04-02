@@ -32,7 +32,6 @@ DROP TABLE IF EXISTS `mailTool`.`domainList` ;
 CREATE TABLE IF NOT EXISTS `mailTool`.`domainList` (
   `index` INT NOT NULL AUTO_INCREMENT COMMENT 'Indice de emails',
   `domainAdress` VARCHAR(256) NOT NULL COMMENT 'endereço completoi',
-  `regionAdress` VARCHAR(5) NOT NULL COMMENT 'apenas a região.\nOBS: se for .com é dado como international.',
   PRIMARY KEY (`index`))
 ENGINE = InnoDB;
 
@@ -45,8 +44,6 @@ DROP TABLE IF EXISTS `mailTool`.`mailCorrect` ;
 CREATE TABLE IF NOT EXISTS `mailTool`.`mailCorrect` (
   `index` INT NOT NULL AUTO_INCREMENT,
   `mailAdress` VARCHAR(256) NOT NULL,
-  `region` VARCHAR(5) NOT NULL,
-  `user` VARCHAR(256) NOT NULL COMMENT 'Até antes do arroba',
   PRIMARY KEY (`index`))
 ENGINE = InnoDB;
 
@@ -63,20 +60,3 @@ CREATE TABLE IF NOT EXISTS `mailTool`.`mailOldList` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `mailTool`.`mailFinalList`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mailTool`.`mailFinalList` ;
-
-CREATE TABLE IF NOT EXISTS `mailTool`.`mailFinalList` (
-  `index` INT NOT NULL AUTO_INCREMENT,
-  `mailAdress` VARCHAR(256) NOT NULL,
-  `region` VARCHAR(5) NOT NULL,
-  `user` VARCHAR(256) NOT NULL COMMENT 'Até antes do arroba',
-  PRIMARY KEY (`index`))
-ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

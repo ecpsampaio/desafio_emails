@@ -11,7 +11,9 @@
  + Na pasta ./database encontra-se o script em sql e a scenepara MySQL Worchbench
  ## Tabelas
  + mailtool é o banco de dados
- + mailoldlist são os e-mails sem as correções
+ ### É preciso carrgá-las
+ + mailoldlist são os e-mails sem as correções (carregar email_list.csv)
+ + domainlist é a lista de domínios  (carregar domain_list.csv)
+ ### NÃO É preciso carrgá-las
  + mailcorrect são os e-mails com as correções
- + domainlist é a lista de domínios
  + exception são as regras
