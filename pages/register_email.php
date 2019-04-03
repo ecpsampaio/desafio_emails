@@ -14,7 +14,7 @@
             $validator = new Validator();  //Instanca da classe validador
             $isValid = $validator->isValidDomain($domain); //Retorna se o dominio é valido
             if($isValid){ 
-                $file = fopen(LIST_EMAIL, "a+"); //Arquivo aberto na memória
+                $file = fopen(LIST_EMAILS, "a+"); //Arquivo aberto na memória
                 fwrite($file, "'". $email  . "'\n"); //Escrita no arquivo
                 fclose($file); //Fecho o arquivo      
 ?>
