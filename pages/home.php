@@ -20,7 +20,7 @@
                 <p class="mt-3">Cadastre Domínios</p>
             </div>
             <div class="col-6 col-md-4 text-center hvr-float w-100">
-                <a href="?page=statistic"><i class="fas fa-chart-pie fa-10x text-primary"></i></a>
+                <a href="?page=invalid_emails"><i class="fas fa-chart-pie fa-10x text-primary"></i></a>
                 <p class="mt-3">Visualize Estatísticas</p>
             </div>
         </div>
