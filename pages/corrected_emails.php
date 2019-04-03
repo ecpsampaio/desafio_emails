@@ -15,13 +15,15 @@
     $invalidEmails = $validator->getEmails($lines)['invalids']; //Pego emails invalidos
     $corrector = new Corrector();
     $correctedEmails = $corrector->correct($invalidEmails);   //Corrige emails invalidos 
+    $statics = new Report;
+    $countCorrectedEmails = $statics->getCountInvalidEmailsReport();
 ?>  
 <div class="container">
     <div class="row mt-5 justify-content-center">
         <div class="col-8 text-center" >
             <div class="card">
                 <div class="card-header">
-                       E-mails
+                       <?php echo "$countCorrectedEmails Emails corrigidos"?>
                 </div>
                 <ul class="list-group list-group-flush">
 <?php                       

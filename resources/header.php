@@ -14,11 +14,11 @@
       <li class="nav-item">
         <a class="nav-link" href="?page=register_email">Cadastrar Email</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="?page=statistic">Estatísticas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="?page=corrected_emails">Emails Corrigidos</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Estatísticas</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="?page=invalid_emails">Emails Inválidos</a>
+          <a class="dropdown-item" href="?page=corrected_emails">Emails Corrigidos</a>
       </li>
     </ul>
   </div>
